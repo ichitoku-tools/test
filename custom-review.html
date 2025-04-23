@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>口コミツール作成フォーム</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1.5em;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      color: #ff6f91;
+      font-size: 1.5rem;
+    }
+    label {
+      display: block;
+      margin: 1em 0 0.3em;
+      font-weight: bold;
+    }
+    input[type="text"], textarea, select {
+      width: 100%;
+      padding: 0.6em;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+    textarea {
+      height: 80px;
+    }
+    button {
+      margin-top: 1.5em;
+      padding: 0.8em 2em;
+      background: #ff6f91;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e85c7c;
+    }
+  </style>
+</head>
+<body>
+  <h1>口コミアシスタント作成フォーム</h1>
+
+  <label for="shopName">店舗名</label>
+  <input type="text" id="shopName" placeholder="例：もみ徳 姪浜店">
+
+  <label for="reviewURL">Google口コミURL</label>
+  <input type="text" id="reviewURL" placeholder="https://..."><br>
+
+  <label for="menuItems">メニューや施術内容（カンマ区切り）</label>
+  <textarea id="menuItems" placeholder="例：力強い, スッキリ, 丁寧な接客"></textarea>
+
+  <label for="staffNames">スタッフ名（カンマ区切り）</label>
+  <textarea id="staffNames" placeholder="例：横田, 桜井, 米倉"></textarea>
+
+  <label for="theme">カラーの選択</label>
+  <select id="theme">
+    <option value="pink">ピンク</option>
+    <option value="blue">ブルー</option>
+    <option value="orange">オレンジ</option>
+    <option value="green">グリーン</option>
+  </select>
+
+  <button onclick="generateTool()">口コミツールを作成する</button>
+
+  <script>
+    function generateTool() {
+      const shop = document.getElementById("shopName").value;
+      const url = document.getElementById("reviewURL").value;
+      const menus = document.getElementById("menuItems").value;
+      const staff = document.getElementById("staffNames").value;
+      const theme = document.getElementById("theme").value;
+
+      alert("以下の内容で生成します：\n\n" +
+        "店舗名：" + shop + "\n" +
+        "URL：" + url + "\n" +
+        "メニュー：" + menus + "\n" +
+        "スタッフ：" + staff + "\n" +
+        "テーマカラー：" + theme);
+
+      // ここにテンプレ書き換えとダウンロード処理が入ります
+    }
+  </script>
+</body>
+</html>
