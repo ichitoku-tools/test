@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>口コミ生成</title>
+  <script>
+    const phrases = ["すごく癒されました", "丁寧な対応でした", "また行きたいと思います"];
+    function showRandomPhrase() {
+      const result = phrases[Math.floor(Math.random() * phrases.length)];
+      document.getElementById("output").innerText = result;
+    }
+  </script>
+</head>
+<body style="text-align:center; padding:2em; background:#fff;">
+  <h2>口コミ生成ツール</h2>
+  <button onclick="showRandomPhrase()" style="font-size:1.2em; padding:1em; background:#f48fb1; color:#fff; border:none; border-radius:10px;">口コミをつくる</button>
+  <div id="output" style="margin-top:2em; font-size:1.1em;"></div>
+</body>
+</html>
