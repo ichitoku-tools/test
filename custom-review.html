@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>口コミツール作成フォーム</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1.5em;
+      background: #f9f9f9;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin: 1em 0 0.3em;
+      font-weight: bold;
+    }
+    input[type="text"], textarea, select {
+      width: 100%;
+      padding: 0.6em;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+    textarea {
+      height: 80px;
+    }
+    button {
+      margin-top: 1.5em;
+      padding: 0.8em 2em;
+      background: #ff6f91;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e85c7c;
+    }
+    pre {
+      background: #fff;
+      padding: 1em;
+      border: 1px solid #ccc;
+      white-space: pre-wrap;
+      margin-top: 2em;
+    }
+  </style>
+</head>
+<body>
+  <h1>口コミアシスタント作成フォーム</h1>
+
+  <label for="shopName">店舗名</label>
+  <input type="text" id="shopName" placeholder="例：もみ徳 姪浜店">
+
+  <label for="reviewURL">Google口コミURL</label>
+  <input type="text" id="reviewURL" placeholder="https://..."><br>
+
+  <label for="menuItems">メニューや施術内容（カンマ区切り）</label>
+  <textarea id="menuItems" placeholder="例：力強い, スッキリ, 丁寧な接客"></textarea>
+
+  <label for="staffNames">スタッフ名（カンマ区切り）</label>
+  <textarea id="staffNames" placeholder="例：横田, 桜井, 米倉"></textarea>
+
+  <label for="theme">カラーの選択</label>
+  <select id="theme">
+    <option value="pink">ピンク</option>
+    <option value="blue">ブルー</option>
+    <option value="orange">オレンジ</option>
+    <option value="green">グリーン</option>
+  </select>
+
+  <button onclick="generateHTML()">HTMLを生成</button>
+
+  <pre id="result"></pre>
+
+  <script>
+    function generateHTML() {
+      const config = {
+        shopName: document.getElementById("shopName").value,
+        reviewURL: document.getElementById("reviewURL").value,
+        staffNames: document.getElementById("staffNames").value.split(',').map(s => s.trim()),
+        menuItems: document.getElementById("menuItems").value.split(',').map(s => s.trim()),
+        theme: document.getElementById("theme").value
+      };
+
+      const html = `<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>${config.shopName}｜口コミページ</title>
+</head>
+<body>
+  <h1>${config.shopName}｜口コミアシスタント</h1>
+  <p>以下から施術の感想をお選びください。</p>
+
+  <div>
+    <h3>スタッフ選択：</h3>
+    ${config.staffNames.map(name => `<label><input type="radio" name="staff" value="${name}"> ${name}</label>`).join('<br>')}
+  </div>
+
+  <div>
+    <h3>メニュー選択：</h3>
+    ${config.menuItems.map(item => `<label><input type="checkbox" value="${item}"> ${item}</label>`).join('<br>')}
+  </div>
+
+  <p><a href="${config.reviewURL}" target="_blank">→ こちらからGoogleクチコミへ</a></p>
+</body>
+</html>`;
+
+      document.getElementById("result").textContent = html;
+    }
+  </script>
+</body>
+</html>
